@@ -24,7 +24,7 @@ public class EscapeRoomSystem {
             System.out.println("Email already in use!");
             return;
         }
-        if (password.length() < 12){
+        if (password.length() <= 12){
             System.out.println("Password is WEAK");
             return;
         }

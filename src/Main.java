@@ -11,9 +11,9 @@ public class Main {
         system.addRoom(new Room(4, 5, 8));
 
         // Adding customers
-        system.registerCustomer("Nate", "1234567890", "natedog@gmail.com", "password");
-        system.registerCustomer("John", "0987654321", "jon.com", "password");
-        system.registerCustomer("Jash", "0987654321", "jash.com", "password"); 
+        system.registerCustomer("Nate", "1234567890", "natedog@gmail.com", "password12345");
+        system.registerCustomer("John", "0987654321", "jon.com", "passwor12231d");
+        system.registerCustomer("Jash", "0987654321", "jash.com", "password12231"); 
 
 
 
