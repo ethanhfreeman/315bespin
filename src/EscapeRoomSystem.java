@@ -44,7 +44,7 @@ public class EscapeRoomSystem {
             }
         }
         //check valid payment for customer
-        if (PlayerList.players.get(CustomerID).validPayment){
+        if (PlayerList.validPayment(CustomerID)){
             System.out.println("Payment valid!");
         }
         else{
@@ -55,6 +55,7 @@ public class EscapeRoomSystem {
         String name = PlayerList.getName(CustomerID);
         //create booking with name
         BookingList.createBooking(name, timeSlot, roomID, numParticipants);
+        System.out.println("Room #"+roomID+" booked successfully for " + numParticipants + " participants, under tthe name of " + name);  
         
     
     }

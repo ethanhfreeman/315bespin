@@ -33,6 +33,14 @@ public class PlayerList {
         }
         return null;
     }
+    public boolean validPayment(int id){
+        for (Player player : players){
+            if (player.getId() == id){
+                return player.validPayment;
+            }
+        }
+        return false;
+    }
     public int getID(String email){
         for (Player player : players){
             if (player.getEmail().equals(email)){
