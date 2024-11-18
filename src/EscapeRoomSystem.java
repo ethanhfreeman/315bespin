@@ -1,37 +1,62 @@
 import java.util.ArrayList;
 import java.time.LocalDateTime;
 
+
+
 public class EscapeRoomSystem {
+
     private ArrayList<Room> rooms = new ArrayList<>();
-    private ArrayList<Customer> customers = new ArrayList<>();
-    private ArrayList<Booking> bookings = new ArrayList<>();
+    PlayerList PlayerList = new PlayerList();
+    BookingList BookingList = new BookingList();
+
 
     public void addRoom(Room room) {
         rooms.add(room);
     }
 
-    public void addCustomer(Customer customer) {
-        customers.add(customer);
+    public void registerCustomer(String name, String phoneNum, String email, String password) {
+        if (PlayerList.phoneNuminSystem(phoneNum)) {
+            System.out.println("Phone number already in use!");
+            return;
+        }
+
+        if (PlayerList.emailinSystem(email)) {
+            System.out.println("Email already in use!");
+            return;
+        }
+        PlayerList.addPlayer(name, phoneNum, email, password);
+        System.out.println("Customer registered successfully!");
     }
 
-    public void bookRoom(String customerEmail, int roomId, LocalDateTime timeSlot) {
-        Customer customer = customers.stream().filter(c -> c.getEmail().equals(customerEmail)).findFirst().orElse(null);
-        Room room = rooms.stream().filter(r -> r.getId() == roomId && r.isAvailable()).findFirst().orElse(null);
+    public void reserveRoom(int CustomerID, LocalDateTime timeSlot, int roomID, int numParticipants){
+        //get maximum participants of the room
+        int maxParticipants = rooms.get(roomID).getMaxParticipants();
+        if (numParticipants > maxParticipants){
+            System.out.println("Number of participants exceeds the maximum limit of the room!");
+            return;
 
-        if (customer == null) {
-            System.out.println("Customer not found!");
+        }
+        //check if the room is available for the timeSlot
+        for (Booking booking : BookingList.bookings){
+            if (booking.getRoomID() == roomID && booking.getTimeSlot().equals(timeSlot)){
+                System.out.println("Room is already booked for the given time slot!");
+                return;
+            }
+        }
+        //check valid payment for customer
+        if (PlayerList.players.get(CustomerID).validPayment){
+            System.out.println("Payment valid!");
+        }
+        else{
+            System.out.println("Payment failed!");
             return;
         }
-
-        if (room == null) {
-            System.out.println("Room not available or does not exist!");
-            return;
-        }
-
-        room.setAvailable(false);
-        Booking booking = new Booking(customer, room, timeSlot);
-        bookings.add(booking);
-        System.out.println("Booking successful: " + booking);
+        //get the name of the customer from the id
+        String name = PlayerList.getName(CustomerID);
+        //create booking with name
+        BookingList.createBooking(name, timeSlot, roomID, numParticipants);
+        
+    
     }
 
     public void displayRooms() {
@@ -39,6 +64,6 @@ public class EscapeRoomSystem {
     }
 
     public void displayBookings() {
-        bookings.forEach(System.out::println);
+        BookingList.bookings.forEach(System.out::println);
     }
 }

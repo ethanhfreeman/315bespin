@@ -2,35 +2,25 @@ import java.util.ArrayList;
 
 public class Room {
     private int id;
-    private String name;
+    private int difficulty;
     private int maxParticipants;
-    private boolean isAvailable;
+    private ArrayList<String> hints = new ArrayList<>();
 
-    public Room(int id, String name, int maxParticipants) {
+    public Room(int id, int difficulty, int maxParticipants) {
         this.id = id;
-        this.name = name;
+        this.difficulty = difficulty;
         this.maxParticipants = maxParticipants;
-        this.isAvailable = true;
     }
 
     public int getId() {
         return id;
     }
-
-    public String getName() {
-        return name;
-    }
-
-    public boolean isAvailable() {
-        return isAvailable;
-    }
-
-    public void setAvailable(boolean available) {
-        isAvailable = available;
+    public int getMaxParticipants() {
+        return maxParticipants;
     }
 
     @Override
     public String toString() {
-        return "Room{id=" + id + ", name='" + name + "', maxParticipants=" + maxParticipants + ", isAvailable=" + isAvailable + "}";
+        return "Room{id=" + id + ", difficulty=" + difficulty + ", maxParticipants=" + maxParticipants + "}";
     }
 }
