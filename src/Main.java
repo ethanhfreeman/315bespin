@@ -9,7 +9,7 @@ public class Main {
         EmployeeManager employeeManager = EmployeeManager.getInstance();
 
         // Configure the manager using EmployeeManager
-        Manager manager = new Manager("John Doe", "jdoe", "securepassword");
+        Manager manager = new Manager("Joel Deker", "jdeker", "securepassword");
         employeeManager.addEmployee(manager);
 
         // Using builder design pattern to create rooms
@@ -38,8 +38,8 @@ public class Main {
 
         // Register customers
         system.registerCustomer("Nate", "1234567890", "natedog@gmail.com", "password12345");
-        system.registerCustomer("John", "0987654321", "jon.com", "password12231");
-        system.registerCustomer("Jash", "0987654321", "jash.com", "password12236");
+        system.registerCustomer("John", "0987654321", "jon@gmail.com", "password12231");
+        system.registerCustomer("Jash", "0987654432", "jash@gmail.com", "password12236");
 
         // Get the Singleton instance of BookingManager
         BookingManager bookingManager = BookingManager.getInstance();
@@ -58,14 +58,14 @@ public class Main {
         );
 
         bookingManager.createBooking(
-                system.PlayerList.getID("jon.com"),
+                system.PlayerList.getID("jon@gmail.com"),
                 LocalDateTime.now(),
                 2,
                 6
         );
 
         bookingManager.createBooking(
-                system.PlayerList.getID("jash.com"),
+                system.PlayerList.getID("jash@gmail.com"),
                 LocalDateTime.now(),
                 3,
                 4
