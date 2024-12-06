@@ -1,0 +1,57 @@
+import java.util.ArrayList;
+import java.util.List;
+
+public class EmployeeManager {
+    // Singleton instance
+    private static EmployeeManager instance;
+
+    // List of employees
+    private List<Employee> employees;
+
+    // Private constructor to prevent direct instantiation
+    private EmployeeManager() {
+        employees = new ArrayList<>();
+    }
+
+    // Public method to get the Singleton instance
+    public static EmployeeManager getInstance() {
+        if (instance == null) {
+            synchronized (EmployeeManager.class) {
+                if (instance == null) {
+                    instance = new EmployeeManager();
+                }
+            }
+        }
+        return instance;
+    }
+
+    // Method to add an employee
+    public void addEmployee(int id, String name, String role) {
+        employees.add(new Employee(id, name, role));
+        System.out.println("Employee added successfully.");
+    }
+
+    // Method to remove an employee
+    public boolean removeEmployee(int id) {
+        for (Employee employee : employees) {
+            if (employee.getId() == id) {
+                employees.remove(employee);
+                System.out.println("Employee removed successfully.");
+                return true;
+            }
+        }
+        System.out.println("Employee not found.");
+        return false;
+    }
+
+    // Method to list all employees
+    public void listEmployees() {
+        if (employees.isEmpty()) {
+            System.out.println("No employees available.");
+            return;
+        }
+        for (Employee employee : employees) {
+            System.out.println("ID: " + employee.getId() + ", Name: " + employee.getName() + ", Role: " + employee.getRole());
+        }
+    }
+}
