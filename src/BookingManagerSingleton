@@ -1,0 +1,66 @@
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
+public class BookingManager {
+    // Singleton instance
+    private static BookingManager instance;
+
+    // List of all bookings
+    private List<Booking> bookings;
+
+    // Private constructor to prevent direct instantiation
+    private BookingManager() {
+        bookings = new ArrayList<>();
+    }
+
+    // Public method to get the Singleton instance
+    public static BookingManager getInstance() {
+        if (instance == null) {
+            synchronized (BookingManager.class) {
+                if (instance == null) {
+                    instance = new BookingManager();
+                }
+            }
+        }
+        return instance;
+    }
+
+    // Method to add a booking
+    public boolean addBooking(String name, int roomID, int numParticipants, LocalDateTime timeSlot) {
+        for (Booking booking : bookings) {
+            if (booking.getRoomID() == roomID && booking.getTimeSlot().equals(timeSlot)) {
+                System.out.println("Room is already booked for this time slot.");
+                return false;
+            }
+        }
+        bookings.add(new Booking(name, roomID, numParticipants, timeSlot));
+        System.out.println("Booking added successfully.");
+        return true;
+    }
+
+    // Method to cancel a booking
+    public boolean cancelBooking(String name, int roomID, LocalDateTime timeSlot) {
+        for (Booking booking : bookings) {
+            if (booking.getName().equals(name) && booking.getRoomID() == roomID && booking.getTimeSlot().equals(timeSlot)) {
+                bookings.remove(booking);
+                System.out.println("Booking canceled successfully.");
+                return true;
+            }
+        }
+        System.out.println("Booking not found.");
+        return false;
+    }
+
+    // Method to view all bookings
+    public void viewBookings() {
+        if (bookings.isEmpty()) {
+            System.out.println("No bookings available.");
+            return;
+        }
+        for (Booking booking : bookings) {
+            System.out.println("Name: " + booking.getName() + ", Room ID: " + booking.getRoomID() + 
+                               ", Participants: " + booking.getNumParticipants() + ", Time Slot: " + booking.getTimeSlot());
+        }
+    }
+}
