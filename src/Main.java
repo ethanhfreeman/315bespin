@@ -39,7 +39,7 @@ public class Main {
         // Register customers
         system.registerCustomer("Nate", "1234567890", "natedog@gmail.com", "password12345");
         system.registerCustomer("John", "0987654321", "jon.com", "password12231");
-        system.registerCustomer("Jash", "0987654321", "jash.com", "password12231");
+        system.registerCustomer("Jash", "0987654321", "jash.com", "password12236");
 
         // Get the Singleton instance of BookingManager
         BookingManager bookingManager = BookingManager.getInstance();
