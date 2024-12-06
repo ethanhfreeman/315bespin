@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 
 public class EscapeRoomSystem {
 
-    private ArrayList<Room> rooms = new ArrayList<>();
+    ArrayList<Room> rooms = new ArrayList<>();
     PlayerList PlayerList = new PlayerList();
     BookingList BookingList = new BookingList();
 
@@ -34,7 +34,7 @@ public class EscapeRoomSystem {
 
     public void reserveRoom(int CustomerID, LocalDateTime timeSlot, int roomID, int numParticipants){
         //get maximum participants of the room
-        int maxParticipants = rooms.get(roomID).getMaxParticipants();
+        int maxParticipants = rooms.get(roomID - 1).getMaxParticipants();
         if (numParticipants > maxParticipants){
             System.out.println("Number of participants exceeds the maximum limit of the room!");
             return;

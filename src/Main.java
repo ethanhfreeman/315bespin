@@ -4,11 +4,26 @@ public class Main {
     public static void main(String[] args) {
         EscapeRoomSystem system = new EscapeRoomSystem();
 
-        // Adding rooms
-        system.addRoom(new Room(1, 3, 5));
-        system.addRoom(new Room(2, 4, 6));
-        system.addRoom(new Room(3, 2, 4));
-        system.addRoom(new Room(4, 5, 8));
+        //using builder design pattern for rooms
+        Room room1 = new RoomBuilder(1, 5, 5)
+                .addHint("Hint: LOOK UP")
+                .addHint("Hint: LOOK DOWN")
+                .addHint("Hint: LOOK AROUND")
+                .build();
+        Room room2 = new RoomBuilder(2, 6, 4)
+                .addHint("Hint: REMEMBER TO BREATHE")
+                .addHint("Hint: DON'T PANIC")
+                .addHint("Hint: STAY CALM")
+                .build();
+        Room room3 = new RoomBuilder(3, 4, 3)
+                .addHint("Hint: THEY'RE WATCHING YOU")
+                .addHint("Hint: YOU'RE NOT ALONE")
+                .addHint("Hint: RUN")
+                .build();
+
+        system.addRoom(room1);
+        system.addRoom(room2);
+        system.addRoom(room3);
 
         // Adding customers
         system.registerCustomer("Nate", "1234567890", "natedog@gmail.com", "password12345");
