@@ -4,6 +4,11 @@ public class Main {
     public static void main(String[] args) {
         EscapeRoomSystem system = new EscapeRoomSystem();
 
+        Manager manager = Manager.getInstance();
+        manager.setName("John Doe");
+        manager.setUserName("jdoe");
+        manager.setPassword("securepassword");
+
         //using builder design pattern for rooms
         Room room1 = new RoomBuilder(1, 5, 5)
                 .addHint("Hint: LOOK UP")
